@@ -1,0 +1,80 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Új esemény rögzítése</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <div *ngIf = "!isSuccess">
+
+    <form>
+
+    <ion-searchbar (click)="openPartnerModal()" [(ngModel)]="partnerName" name="pid" placeholder="Partner kereése"></ion-searchbar>
+
+    <ion-item>
+      <ion-label>Esemény típus</ion-label>
+      <ion-select [(ngModel)]="todo.type" name="type" interface="popover">
+        <ion-option *ngFor="let type of types" [value]="type.id">{{type.name}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Megjegyzés</ion-label>
+      <ion-textarea [(ngModel)]="todo.message" name="message"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Részletek</ion-label>
+      <ion-textarea [(ngModel)]="todo.details"  name="details"></ion-textarea>
+    </ion-item>
+
+    <button ion-button icon-left color="light" (click)="takePictureAction()">
+      <ion-icon name="camera"></ion-icon>
+      Kamera
+    </button>
+
+    <button ion-button icon-left color="light" (click)="takeGalleryAction()">
+      <ion-icon name="images"></ion-icon>
+      Galéria
+    </button>
+
+    <ion-list>
+
+      <ion-item *ngFor="let picture of pictures">
+        <ion-thumbnail item-start>
+          <img [src]="picture">
+        </ion-thumbnail>
+        <button ion-button clear item-end>töröl</button>
+      </ion-item>
+
+    </ion-list>
+
+    <!-- <button ion-button color="secondary" (click)="presentActionSheet()">add picture</button>
+    <button ion-button color="secondary" (click)="uploadPictures()">Upload Picture</button> -->
+
+    <div padding>
+      <button block type="submit" ion-button (click)="postEventAction()">Rögzítés</button>
+    </div>
+
+  </form>
+
+  </div>
+
+  <div *ngIf = "isSuccess">
+    <p>Sikeres rögzítés</p>
+  </div>
+
+  <!--
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-item *ngFor="let p of filteredPhones" (click)="phoneSelectedAction(p.id,p.manufacturer,p.name)">
+    {{p.id}}.  {{p.manufacturer}} - {{p.name}}
+  </ion-item>
+  -->
+
+
+
+</ion-content>
